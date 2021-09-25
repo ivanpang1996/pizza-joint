@@ -13,7 +13,7 @@ repositories {
 }
 
 dependencies {
-    implementation project(':order-service')
+    implementation project(':order-service-interface')
     implementation 'org.springframework.boot:spring-boot-starter-web'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }

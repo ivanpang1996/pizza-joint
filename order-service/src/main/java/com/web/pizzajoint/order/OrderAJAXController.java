@@ -1,5 +1,6 @@
 package com.web.pizzajoint.order;
 
+import com.web.pizzajoint.app.OrderItemAJAXView;
 import com.web.pizzajoint.order.domain.OrderItem;
 import com.web.pizzajoint.order.service.CreateOrderRequest;
 import com.web.pizzajoint.order.service.CreateOrderResponse;
@@ -21,7 +22,7 @@ public class OrderAJAXController {
     OrderService orderService;
 
     @PostMapping("")
-    public com.web.pizzajoint.order.CreateOrderAJAXResponse create(@RequestBody CreateOrderAJAXRequest request) {
+    public com.web.pizzajoint.order.CreateOrderAJAXResponse create(@RequestBody com.web.pizzajoint.order.CreateOrderAJAXRequest request) {
         BigDecimal totalPrice = totalPriceCalculator(request.orderItems);
         var orderRequest = new CreateOrderRequest();
         orderRequest.customerName = request.customerName;

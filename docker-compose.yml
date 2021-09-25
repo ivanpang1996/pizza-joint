@@ -1,6 +1,17 @@
 version: '3.7'
 
 services:
+  generate-order-service:
+    image: generate-order-service:latest
+    ports:
+      - "80:8080"
+    restart: always
+    depends_on:
+      - db
+      - order-service
+    networks:
+      - backend
+
   order-service:
     image: order-service:latest
     ports:
