@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Component
-public class ScheduledOrderGenerator {
+public class ScheduledPizzaOrderGenerator {
     @Value("${order-service.url}")
     private String orderServiceURL;
 

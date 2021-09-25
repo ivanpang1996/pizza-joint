@@ -36,6 +36,7 @@ public class OrderAJAXController {
 
         var response = new com.web.pizzajoint.order.CreateOrderAJAXResponse();
         response.success = orderResponse.success;
+        response.orderId = orderResponse.orderId;
         return response;
     }
 

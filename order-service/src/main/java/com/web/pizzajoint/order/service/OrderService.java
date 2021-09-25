@@ -24,6 +24,7 @@ public class OrderService {
         orderRepository.save(order);
         var response = new CreateOrderResponse();
         response.success = true;
+        response.orderId = order.id;
         return response;
     }
 }

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 @RestController
-public class OrderGenerator {
+public class PizzaOrderGenerator {
     @Value("${order-service.url}")
     private String orderServiceURL;
 
@@ -25,8 +25,21 @@ public class OrderGenerator {
     }
 
     @PostMapping("/order")
-    public CreateOrderAJAXResponse generate(@RequestBody CreateOrderAJAXRequest request) {
+    public CreatePizzaOrderAJAXResponse generate(@RequestBody CreatePizzaOrderAJAXRequest request) {
         RestTemplate restTemplate = new RestTemplate();
-        return restTemplate.postForObject(orderServiceURL + "/api/order", request, CreateOrderAJAXResponse.class);
+        var createRequest = new CreateOrderAJAXRequest();
+        createRequest.customerName = request.customerName;
+        createRequest.orderItems = request.orderItems;
+
+        var response = new CreatePizzaOrderAJAXResponse();
+        CreateOrderAJAXResponse orderResponse = restTemplate.postForObject(orderServiceURL + "/api/order", createRequest, CreateOrderAJAXResponse.class);
+        if (orderResponse == null) {
+            response.success = Boolean.FALSE;
+            return response;
+        }
+        response.success = orderResponse.success;
+        response.orderId = orderResponse.orderId;
+        return response;
     }
+
 }

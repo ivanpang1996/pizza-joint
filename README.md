@@ -32,6 +32,6 @@ Kubernetes is a good way to do the service discovery. We need to create `deploym
 Therefore, after created the cluster by (e.g. `minikube` & in the cloud provider), we only need to apply the yaml provided (`kubectl apply -f /kube`) to create Kubernetes resource. Kubernetes will help to do the rest.
 ![alt text](k8s.png "Title")
 
-If you need external access, you should create a load balancer and sit in front your service. If you are using GCP, GCP is natively create a loadbalancer for you if you create an ingress resource. However, in AWS, remember to create a controller and grant a service account to the controller. The controller will help you create the alb when you are trying to create an ingress resource. 
+If you need external access, you should create a load balancer and sit in front your service and attach your certificate on the loadbalancer. If you are using GCP, GCP is natively create a loadbalancer for you if you create an ingress resource. However, in AWS, remember to create a controller and grant a service account to the controller. The controller will help you create the alb when you are trying to create an ingress resource. 
 
 Also, in order to keep the sensitive data secret, you can use a `secret` resource in Kubernetes. It will keep a key-value. Therefore, you can inject the env variable to your container by `valueFrom` (e.g. 04-order-service).
