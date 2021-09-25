@@ -1,0 +1,38 @@
+version: '3.7'
+
+services:
+  order-service:
+    image: order-service:latest
+    ports:
+      - "8080:8080"
+    restart: always
+    depends_on:
+      - db
+    environment:
+      DATABASE_HOST: db
+      DATABASE: db
+      DATABASE_USER: order
+      DATABASE_PASSWORD: order123
+    networks:
+      - backend
+
+  db:
+    image: mysql:latest
+    ports:
+      - "3306:3306"
+    restart: always
+    environment:
+      MYSQL_DATABASE: db
+      MYSQL_USER: order
+      MYSQL_PASSWORD: order123
+      MYSQL_ROOT_PASSWORD: root123
+    volumes:
+      - db-data:/var/lib/mysql
+    networks:
+      - backend
+
+volumes:
+  db-data:
+
+networks:
+  backend:
