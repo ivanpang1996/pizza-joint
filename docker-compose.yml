@@ -9,6 +9,8 @@ services:
     depends_on:
       - db
       - order-service
+    environment:
+      ORDER_SERVICE_ENDPOINT: order-service:8080
     networks:
       - backend
 
