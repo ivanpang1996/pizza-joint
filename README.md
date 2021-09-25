@@ -14,7 +14,7 @@ There are two ways to make two services talk to each other.
 2. Kubernetes
 
 
-###1. Docker Compose <br/>
+### 1. Docker Compose
 In this repo, I have included a `docker-compose.yml`. <br/>
 First, you have to build the images for two services using the DockerFile provided in different directory.
 ```
@@ -26,7 +26,7 @@ docker-compose up
 In the yml, I have created a local network. All the services within this local network can discovery and communicate with each other.<br/>
 `order-service` have dependency on DB and `generate-order-serivce` have dependency on `order-service`.
 
-###2. Kubernetes <br/>
+### 2. Kubernetes
 Kubernetes is a good way to do the service discovery. We need to create `deployment` & `service` two Kubernetes resource inside the cluster. Deployment don't have any connectivity in the beginning and Service is one to traffic down to the worker pod. <br/> `kube-dns` (or `core-dns` in AWS) is a default deployment can help to maintain the internal dns in the cluster. The service resource will help register the endpoint to the kube-dns resource (e.g. `<svc>.<ns>.svc.clusterset.local`). Each service can be discovered by each other using internal DNS.
 
 Therefore, after created the cluster by (e.g. `minikube` & in the cloud provider), we only need to apply the yaml provided (`kubectl apply -f /kube`) to create Kubernetes resource. Kubernetes will help to do the rest.
