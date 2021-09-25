@@ -12,9 +12,13 @@ export interface Pizza {
 function App() {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
-    const handleAdd = (item : OrderItem) => {
-        orderItems.push(item)
+    const handleAdd = (chosenPizza: Pizza) => {
+        setOrderItems([...orderItems, {pizzaName: chosenPizza.name, price: chosenPizza.price, quantity: 1}])
     }
+    const [currentPizza, setCurrentPizza] = useState<Pizza>({
+        name: "pizza1",
+        price: 10
+    });
     const [orderItems, setOrderItems] = useState<Array<OrderItem>>([]);
     const [pizzas, setPizzas] = useState<Array<Pizza>>([
         {
@@ -39,7 +43,7 @@ function App() {
                     <Row xs={1} md={4}>
                         {
                             pizzas.map(pizza => (
-                                <PizzaCard pizza={pizza} setShow={setShow}/>
+                                <PizzaCard pizza={pizza} setShow={setShow} setCurrentPizza={setCurrentPizza}/>
                             ))
                         }
 
@@ -50,7 +54,7 @@ function App() {
                     <CheckOutForm items={orderItems}/>
                 </div>
             </div>
-            <Detail handleClose={handleClose} show={show}/>
+            <Detail pizza={currentPizza} handleClose={handleClose} handleAdd={handleAdd} show={show}/>
         </div>
     );
 }

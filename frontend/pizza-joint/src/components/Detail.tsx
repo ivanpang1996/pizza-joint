@@ -1,12 +1,15 @@
 import {Button, Form, Modal} from "react-bootstrap";
 import React from "react";
+import {Pizza} from "../App";
 
 interface Props {
+    pizza: Pizza
     show: boolean
     handleClose: any
+    handleAdd: any
 }
 
-function Detail({show, handleClose}: Props) {
+function Detail({pizza, show, handleClose, handleAdd}: Props) {
     return (
         <Modal size="lg" show={show} onHide={handleClose}>
             <Modal.Header>
@@ -21,7 +24,7 @@ function Detail({show, handleClose}: Props) {
             </Modal.Body>
 
             <Modal.Footer>
-                <Button variant="primary">
+                <Button variant="primary" onClick={handleAdd(pizza)}>
                     Add
                 </Button>
                 <Button variant="secondary" onClick={handleClose}>

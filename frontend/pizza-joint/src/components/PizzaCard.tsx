@@ -5,10 +5,11 @@ import {Pizza} from "../App";
 interface Props {
     pizza: Pizza;
     setShow: any;
+    setCurrentPizza: any;
 }
 
 
-function PizzaCard({pizza, setShow}: Props) {
+function PizzaCard({pizza, setShow, setCurrentPizza}: Props) {
     return (
         <Col>
             <Card>
@@ -21,6 +22,7 @@ function PizzaCard({pizza, setShow}: Props) {
                     </Card.Text>
                     <Button variant="primary" onClick={() => {
                         setShow(true);
+                        setCurrentPizza(pizza);
                     }}>Choose</Button>
                 </Card.Body>
             </Card>
