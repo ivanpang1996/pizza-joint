@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: order-service
+  namespace: app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: order-service
+  revisionHistoryLimit: 10
+  strategy:
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
+  minReadySeconds: 10
+  template:
+    metadata:
+      labels:
+        app: order-service
+    spec:
+      terminationGracePeriodSeconds: 60
+      containers:
+        - name: order-service
+          # use a proper image registry (e.g. docker hub , GCR, ECR)
+          image: order-service:latest
+
+          # create a secret resource called order-service-secret
+          env:
+            - name: DATABASE_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: order-service-secret
+                  key: host
+            - name: DATABASE
+              valueFrom:
+                secretKeyRef:
+                  name: order-service-secret
+                  key: db
+            - name: DATABASE_USER
+              valueFrom:
+                secretKeyRef:
+                  name: order-service-secret
+                  key: user
+            - name: DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: order-service-secret
+                  key: password
+          readinessProbe:
+            httpGet:
+              path: /healthcheck
+              scheme: HTTP
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 10
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: order-service
+  namespace: app
+spec:
+  ports:
+    - port: 8080
+      targetPort: 8080
+  selector:
+    app: order-service

@@ -14,6 +14,11 @@ public class OrderGenerator {
     @Value("${order-service.url}")
     private String orderServiceURL;
 
+    @GetMapping("/healthcheck")
+    public String healthCheck() {
+        return "";
+    }
+
     @GetMapping("")
     public String welcome() {
         return "welcome to pizza joint.";

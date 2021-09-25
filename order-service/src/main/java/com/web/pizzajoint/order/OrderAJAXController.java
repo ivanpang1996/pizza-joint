@@ -6,9 +6,9 @@ import com.web.pizzajoint.order.service.CreateOrderRequest;
 import com.web.pizzajoint.order.service.CreateOrderResponse;
 import com.web.pizzajoint.order.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigDecimal;
@@ -16,12 +16,16 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping(path = "/api/order")
 public class OrderAJAXController {
     @Autowired
     OrderService orderService;
 
-    @PostMapping("")
+    @GetMapping("/healthcheck")
+    public String healthCheck() {
+        return "";
+    }
+
+    @PostMapping("/api/order")
     public com.web.pizzajoint.order.CreateOrderAJAXResponse create(@RequestBody com.web.pizzajoint.order.CreateOrderAJAXRequest request) {
         BigDecimal totalPrice = totalPriceCalculator(request.orderItems);
         var orderRequest = new CreateOrderRequest();
