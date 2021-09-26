@@ -24,7 +24,10 @@ function Detail({pizza, show, handleClose, handleAdd}: Props) {
             </Modal.Body>
 
             <Modal.Footer>
-                <Button variant="primary" onClick={handleAdd(pizza)}>
+                <Button variant="primary" onClick={() => {
+                    handleAdd(pizza);
+                    handleClose();
+                }}>
                     Add
                 </Button>
                 <Button variant="secondary" onClick={handleClose}>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 
 export interface OrderItem {
     pizzaName: string
@@ -18,14 +18,15 @@ function CheckOutForm({items}: Props) {
                 className="text-muted">Your bill</span></h4>
 
             <ul className="list-group mb-3">
-                {items.map(item => {
+                {items.map(item => (
                     <li className="list-group-item d-flex justify-content-between lh-condensed">
                         <div>
-                            <h6 className="my-0">{item.pizzaName}</h6>
+                            <h6 className="my-0">{item.pizzaName} x {item.quantity}</h6>
                             <span className="text-muted">${item.price * item.quantity}</span>
                         </div>
                     </li>
-                })}
+                ))
+                }
             </ul>
         </>
     )
