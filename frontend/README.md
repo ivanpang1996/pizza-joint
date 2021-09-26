@@ -1,5 +1,5 @@
 ## How to run? 
-Go the `pizza-joint` dir and type ` yarn start `.
+Go the [pizza-joint](https://github.com/ivanpang1996/pizza-joint/tree/main/frontend/pizza-joint) dir and run by ` yarn start `.
 
 ## UI
 

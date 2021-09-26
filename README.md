@@ -1,6 +1,6 @@
 ![](https://images.squarespace-cdn.com/content/v1/5bc638369b8fe864b188a448/1583688817195-5C326ML1L6JOKBMZJ8P2/Pizza-Nevada-City)
 
-# [Frontend](https://github.com/ivanpang1996/pizza-joint/tree/main/frontend/README.md)
+# [Frontend](https://github.com/ivanpang1996/pizza-joint/tree/main/frontend)
 Please see the `frontend` dir.
 
 # Backend
